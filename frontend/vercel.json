@@ -1,4 +1,6 @@
 {
+  "framework": "nextjs",
+  "outputDirectory": ".next",
   "functions": {
     "api/*.js": {
       "maxDuration": 10
