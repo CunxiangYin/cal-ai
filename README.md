@@ -1,5 +1,12 @@
 # 🍽️ Cal AI - 智能卡路里追踪应用
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Claude-AI-purple" alt="Claude AI"/>
+  <img src="https://img.shields.io/badge/Vercel-Ready-black" alt="Vercel"/>
+</p>
+
 一个基于AI的智能卡路里追踪应用，支持自然语言输入和语音识别，自动分析食物营养成分。
 
 ## ✨ 功能特点
