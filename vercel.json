@@ -1,9 +1,10 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/.next",
+  "installCommand": "cd frontend && npm install",
   "framework": "nextjs",
   "functions": {
-    "api/*.js": {
+    "frontend/app/api/**/*.ts": {
       "maxDuration": 10
     }
   }

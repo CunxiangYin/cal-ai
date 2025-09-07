@@ -1,13 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { v4 as uuidv4 } from 'uuid';
 
-// Initialize Anthropic client
-const anthropic = process.env.ANTHROPIC_API_KEY 
-  ? new Anthropic({
+export const runtime = 'nodejs';
+
+// Lazy load Anthropic to ensure it only runs on server
+let anthropic: any = null;
+
+async function getAnthropicClient() {
+  if (!anthropic && process.env.ANTHROPIC_API_KEY) {
+    const Anthropic = (await import('@anthropic-ai/sdk')).default;
+    anthropic = new Anthropic({
       apiKey: process.env.ANTHROPIC_API_KEY,
-    })
-  : null;
+    });
+  }
+  return anthropic;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -63,9 +70,10 @@ export async function POST(request: NextRequest) {
 
     // Call Claude API
     let result: any;
-    if (anthropic && process.env.ANTHROPIC_API_KEY) {
+    const anthropicClient = await getAnthropicClient();
+    if (anthropicClient && process.env.ANTHROPIC_API_KEY) {
       try {
-        const response = await anthropic.messages.create({
+        const response = await anthropicClient.messages.create({
           model: 'claude-3-haiku-20240307',
           max_tokens: 1024,
           temperature: 0.7,
